@@ -1,0 +1,73 @@
+package fp.universidad.tipos;
+
+import java.util.Objects;
+
+public record Nota(Asignatura asignatura, Integer cursoAcademico, Convocatoria convocatoria, Double valor, Boolean mencionHonor) {
+	public Calificacion getCalificacion() {
+		if(valor>=9) {
+			if (mencionHonor) {
+				return Calificacion.MATRICULA_DE_HONOR;
+			}
+			else {
+				return Calificacion.SOBRESALIENTE;
+			}
+		} else if (valor>=7) {
+			return Calificacion.NOTABLE;
+		} else if (valor>=5) {
+			return Calificacion.APROBADO;
+		} else {
+			return Calificacion.SUSPENSO;
+		}
+	}
+	
+	public Nota{
+		checkValor(valor);
+		checkMencion(valor,mencionHonor);
+	}
+	
+	private void checkMencion(Double valor, Boolean mencionHonor) {
+		// TODO Auto-generated method stub
+		if(valor<9 && mencionHonor) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	private void checkValor(Double valor) {
+		// TODO Auto-generated method stub
+		if (valor>10 || valor<0) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public Nota(Asignatura asignatura, Integer cursoAcademico, Convocatoria convocatoria, Double valor) {
+		this(asignatura, cursoAcademico, convocatoria, valor, false);
+	}
+	
+	@Override
+	public String toString() {
+		Integer nuevoCurso = cursoAcademico + 1;
+		return asignatura + ", " + cursoAcademico + "-" + nuevoCurso.toString().toCharArray()[2] + nuevoCurso.toString().toCharArray()[3] + ", " + 
+				convocatoria + ", " + valor + ", " + getCalificacion();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(asignatura, convocatoria, cursoAcademico);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Nota other = (Nota) obj;
+		return Objects.equals(asignatura, other.asignatura) && convocatoria == other.convocatoria
+				&& Objects.equals(cursoAcademico, other.cursoAcademico);
+	}
+	
+	
+	
+}

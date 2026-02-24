@@ -1,0 +1,5 @@
+package fp.universidad.tipos;
+
+public record Asignatura(String nombre, String codigo, Integer creditos, TipoAsignatura tipo) {
+
+}

@@ -1,0 +1,10 @@
+package fp.universidad.tipos.test;
+
+public class TestNota {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

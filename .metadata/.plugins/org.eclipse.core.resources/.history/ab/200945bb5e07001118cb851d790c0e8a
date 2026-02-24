@@ -1,0 +1,13 @@
+package fp.universidad.tipos;
+
+public record Asignatura(String nombre, String codigo, Integer creditos, Integer curso, TipoAsignatura tipo) {
+	public String getAcronimo() {
+		String result = "";
+		for (Character c : nombre.toCharArray()) {
+			if(Character.isUpperCase(c)) {
+				result += c;
+			}
+		}
+		return result;
+	}
+}

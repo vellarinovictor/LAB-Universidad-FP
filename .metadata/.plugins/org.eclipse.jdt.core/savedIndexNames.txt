@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\vella\OneDrive - UNIVERSIDAD DE SEVILLA\Documentos\LAB-Universidad-master\.metadata\.plugins\org.eclipse.jdt.core
+32852003.index
+4145570505.index
+1865797976.index

@@ -1,0 +1,83 @@
+package fp.universidad.tipos;
+
+import java.time.LocalDate;
+import java.util.Objects;
+
+public class Persona {
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellidos, dni, nombre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		return Objects.equals(apellidos, other.apellidos) && Objects.equals(dni, other.dni)
+				&& Objects.equals(nombre, other.nombre);
+	}
+
+	private String dni,nombre,apellidos,email;
+	private LocalDate fechaNacimiento;
+	
+	public Persona(String dni, String nombre, String apellidos, LocalDate fechaNacimiento) {
+		this(dni,nombre,apellidos,"",fechaNacimiento);
+	}
+
+	public Persona(String dni, String nombre, String apellidos, String email, LocalDate fechaNacimiento) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.email = email;
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public Integer getEdad() {
+		return fechaNacimiento.until(LocalDate.now()).getYears();
+	}
+	
+	public String getDni() {
+		return dni;
+	}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellidos() {
+		return apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	@Override
+	public String toString() {
+		return dni + " - " + apellidos + ", " + nombre + " - "
+				+ fechaNacimiento;
+	}
+	
+	
+}
