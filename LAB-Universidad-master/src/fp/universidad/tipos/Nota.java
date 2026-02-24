@@ -46,7 +46,7 @@ public record Nota(Asignatura asignatura, Integer cursoAcademico, Convocatoria c
 	@Override
 	public String toString() {
 		Integer nuevoCurso = cursoAcademico + 1;
-		return asignatura + ", " + cursoAcademico + "-" + nuevoCurso.toString().toCharArray()[2] + nuevoCurso.toString().toCharArray()[3] + ", " + 
+		return asignatura + ", " + cursoAcademico + "-" + nuevoCurso.toString().substring(2) + ", " + 
 				convocatoria + ", " + valor + ", " + getCalificacion();
 	}
 

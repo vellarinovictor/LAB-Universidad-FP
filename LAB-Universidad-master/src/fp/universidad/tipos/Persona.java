@@ -1,11 +1,11 @@
 package fp.universidad.tipos;
 
-import java.awt.datatransfer.StringSelection;
 import java.time.LocalDate;
 import java.util.Objects;
 
 
-public class Persona {
+public class Persona implements Comparable<Persona>{
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(apellidos, dni, nombre);
@@ -33,14 +33,13 @@ public class Persona {
 
 	public Persona(String dni, String nombre, String apellidos, String email, LocalDate fechaNacimiento) {
 		super();
-		checkDni(dni);
-		checkEmail(email);
-		this.dni = dni;
+		setEmail(email);
+		setDni(dni);
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.email = email;
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	
 
 	private void checkEmail(String email) {
 		// TODO Auto-generated method stub
@@ -52,6 +51,11 @@ public class Persona {
 	private void checkDni(String dni) {
 		// TODO Auto-generated method stub
 		Character letra = dni.charAt(8);
+		for (int i=0;i<dni.length()-1;i++) {
+			if(!Character.isDigit(dni.charAt(i))) {
+				throw new IllegalArgumentException();
+			}
+		}
 		if(dni.length()!=9 || !Character.isLetter(letra)) {
 			throw new IllegalArgumentException();
 		}
@@ -65,6 +69,7 @@ public class Persona {
 		return dni;
 	}
 	public void setDni(String dni) {
+		checkDni(dni);
 		this.dni = dni;
 	}
 	public String getNombre() {
@@ -83,6 +88,7 @@ public class Persona {
 		return email;
 	}
 	public void setEmail(String email) {
+		checkEmail(email);
 		this.email = email;
 	}
 	public LocalDate getFechaNacimiento() {
@@ -96,6 +102,19 @@ public class Persona {
 	public String toString() {
 		return dni + " - " + apellidos + ", " + nombre + " - "
 				+ fechaNacimiento;
+	}
+
+	@Override
+	public int compareTo(Persona other) {
+		// TODO Auto-generated method stub
+		int result = this.apellidos.compareTo(other.apellidos);
+		if (result == 0) {
+			result = this.nombre.compareTo(other.nombre);
+			if(result == 0) {
+				result = this.dni.compareTo(other.dni);
+			}
+		}
+		return result;
 	}
 	
 	

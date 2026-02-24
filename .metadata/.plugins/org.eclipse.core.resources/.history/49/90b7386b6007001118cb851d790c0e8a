@@ -1,7 +1,0 @@
-package fp.universidad.tipos;
-
-public class Espacio {
-	private String nombre;
-	private Integer capacidad,planta;
-	private TipoEspacio tipo;
-}

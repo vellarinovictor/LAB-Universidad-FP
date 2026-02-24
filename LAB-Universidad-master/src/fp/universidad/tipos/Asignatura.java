@@ -2,7 +2,7 @@ package fp.universidad.tipos;
 
 import java.util.Objects;
 
-public record Asignatura(String nombre, String codigo, Integer creditos, Integer curso, TipoAsignatura tipo) {
+public record Asignatura(String nombre, String codigo, Integer creditos, Integer curso, TipoAsignatura tipo) implements Comparable<Asignatura>{
 	public String getAcronimo() {
 		String result = "";
 		for (Character c : nombre.toCharArray()) {
@@ -19,9 +19,24 @@ public record Asignatura(String nombre, String codigo, Integer creditos, Integer
 		checkCurso(curso);
 	}
 	
+	public int compareTo(Asignatura other) {
+		return this.codigo.compareTo(other.codigo);
+	}
+	
+	private Boolean todosDigitos(String codigo) {
+		Boolean result = true;
+		for (int i = 0;i<codigo.length();i++) {
+			if(!Character.isDigit(codigo.charAt(i))) {
+				result = false;
+				break;
+			}
+		}
+		return result;
+	}
+	
 	private void checkCurso(Integer curso) {
 		// TODO Auto-generated method stub
-		if(curso>4) {
+		if(curso<=0 || curso>4) {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -35,7 +50,7 @@ public record Asignatura(String nombre, String codigo, Integer creditos, Integer
 
 	private void checkCodigo(String codigo) {
 		// TODO Auto-generated method stub
-		if(codigo.length()!=7) {
+		if(codigo.length()!=7 && todosDigitos(codigo)) {
 			throw new IllegalArgumentException();
 		}
 	}
